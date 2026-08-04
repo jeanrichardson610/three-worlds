@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-display: "Space Grotesk", ui-sans-serif, sans-serif;
+  --font-anime: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --font-body: "Inter", ui-sans-serif, sans-serif;
+
+  /* Shell (app chrome) */
+  --color-shell-bg: #0a0b0d;
+  --color-shell-panel: #101216;
+  --color-shell-border: #1d2027;
+  --color-shell-accent: #7c6cff;
+  --color-shell-accent-soft: #7c6cff33;
+  --color-shell-text: #e7e8ec;
+  --color-shell-muted: #8b8f9a;
+
+  /* Banking identity */
+  --color-bank-bg: #0a1220;
+  --color-bank-surface: #0f1c30;
+  --color-bank-surface-2: #142642;
+  --color-bank-border: #1e3252;
+  --color-bank-text: #eaf1fb;
+  --color-bank-muted: #7f93b4;
+  --color-bank-mint: #33d6ac;
+  --color-bank-rose: #ff6b7a;
+  --color-bank-gold: #e9bd6b;
+
+  /* Anime identity */
+  --color-anime-bg: #0c0710;
+  --color-anime-surface: #17101f;
+  --color-anime-border: #2a1c38;
+  --color-anime-text: #f3ecfa;
+  --color-anime-muted: #a291b8;
+  --color-anime-magenta: #ff3d81;
+  --color-anime-cyan: #33e1ed;
+  --color-anime-gold: #ffc23d;
+
+  /* Weather identity (base; runtime overrides via inline style / CSS vars) */
+  --color-weather-text: #f5f9ff;
+  --color-weather-muted: #cdd9ea;
+
+  --animate-spin-slow: spin 3s linear infinite;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background: var(--color-shell-bg);
+    color: var(--color-shell-text);
+    font-family: var(--font-body);
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #3a3d46 transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3a3d46;
+    border-radius: 999px;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .glass {
+    background: color-mix(in srgb, white 8%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background: color-mix(in srgb, currentColor 10%, transparent);
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, currentColor 18%, transparent),
+      transparent
+    );
+    animation: skeleton-sweep 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes skeleton-sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes radar-ping {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Leaflet radar map — dark theme overrides */
+.leaflet-container {
+  background: #0b1026;
+  font-family: var(--font-body);
+}
+.leaflet-control-attribution {
+  background: rgba(0, 0, 0, 0.4) !important;
+  color: #cdd9ea !important;
+}
+.leaflet-control-attribution a {
+  color: #cdd9ea !important;
+}
+.leaflet-control-zoom a {
+  background: rgba(0, 0, 0, 0.5) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Banking dashboard light-mode override. Tailwind v4 utilities like
+   bg-bank-bg compile to var(--color-bank-bg), so re-declaring these
+   custom properties inside a scoped class is enough to re-theme every
+   banking component without touching component code. */
+.bank-light {
+  --color-bank-bg: #f2f5fa;
+  --color-bank-surface: #ffffff;
+  --color-bank-surface-2: #eef2f8;
+  --color-bank-border: #dce3ee;
+  --color-bank-text: #101a2b;
+  --color-bank-muted: #5b6b84;
+  --color-bank-mint: #12a983;
+  --color-bank-rose: #d93a51;
+  --color-bank-gold: #a3701f;
+}
