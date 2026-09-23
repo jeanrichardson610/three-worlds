@@ -6,7 +6,7 @@ import type { GeoResult } from "@/types/weather";
 import { fetchRadarFrames, radarTileUrl, type RadarFrame } from "@/lib/rainviewerapi";
 
 const DARK_TILES =
-  `https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?api_key=${import.meta.env.CARTO_API_KEY}`;
+  `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?api_key=${import.meta.env.CARTO_API_KEY}`;
 const TILE_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
