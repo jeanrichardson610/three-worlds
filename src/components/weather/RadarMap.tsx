@@ -6,9 +6,9 @@ import type { GeoResult } from "@/types/weather";
 import { fetchRadarFrames, radarTileUrl, type RadarFrame } from "@/lib/rainviewerapi";
 
 const DARK_TILES =
-  `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?api_key=${import.meta.env.CARTO_API_KEY}`;
+  `https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png?api_key=${import.meta.env.CARTO_API_KEY}`;
 const TILE_ATTRIBUTION =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function frameLabel(frame: RadarFrame) {
   const diffMin = Math.round((frame.time * 1000 - Date.now()) / 60000);
